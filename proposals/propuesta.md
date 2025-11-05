@@ -15,6 +15,7 @@ Complejidad técnica: Media – requiere manejo de eventos, filtrado y exportaci
 Dependencias: Librerias agregadas de Python (pandas, requests, csv, os, logging)
 
 
+
 Tarea 2: Mostrar conexiones y procesos
 
 Propósito: Identificar conexiones activas y procesos sin firma digital válida
@@ -30,6 +31,7 @@ Procedimiento: Uso de Get-NetTCPConnection y Get-Process con verificación de fi
 Complejidad técnica: Media – requiere comprensión de procesos y conexiones
 
 Dependencias: PowerShell, acceso a funciones del sistema
+
 
 
 Tarea 3: Investigación de direcciones IP
