@@ -1,5 +1,9 @@
-# Entregable 2 – MVP Funcional Parcial## Descripción generalEsta versión inicial implementa la tarea de **análisis de sentimiento** como parte del MVP del proyecto PIA.
-## Estructura - `/src/tarea1.py`: código principal.- `/examples`: contiene ejemplos de entrada, salida y logs.- `/run_tarea1.sh`: script de ejecución.- `/docs/entregable_2.md`: esta documentación técnica.
-## Ejecución 1. Instalar dependencias:
-   ```bash
-   pip install -r requirements.txt
+
+Entregable 2 - Avance Técnico
+
+Tarea 
+Se desarrolló un script en PowerShell que analiza registros de eventos de Windows (Security Log) para identificar actividad sospechosa. En esta versión inicial detecta:
+- Intentos fallidos de inicio de sesión (EventID 4625)
+- Elevación de privilegios (EventID 4672)
+- Creación de procesos anómalos (EventID 4688)
+>>>>>>> 4950e1e (Segundo Entregable)
