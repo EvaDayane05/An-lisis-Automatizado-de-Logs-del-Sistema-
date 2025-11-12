@@ -1,81 +1,75 @@
 # Analisis-Automatizado-de-Logs-del-Sistema-
 
-#  Entregable 3 – Integración parcial y plan de IA
- 
-> Este entregable forma parte del repositorio único del proyecto PIA. La propuesta técnica se encuentra en [`/proposals/propuesta.md`](../proposals/propuesta.md).
- 
+# Proyecto Final PIA – Auditoría Forense Automatizada
+
+Este proyecto forma parte del Entregable 3 del Proyecto Final PIA. Integra dos tareas funcionales en distintos lenguajes (PowerShell y Python) para construir un pipeline modular, reproducible y orientado a la auditoría forense de eventos de seguridad en sistemas Windows.
+
 ---
- 
-##  Tareas integradas
- 
-- **Tarea 1**: [Nombre]
 
-- **Tarea 2**: [Nombre]
+ Componentes del Proyecto
 
-- **Descripción de la integración**:  
-> [Narración funcional del flujo entre tareas: cómo se conectan, qué datos comparten, qué salidas se generan.]
- 
+ Extracción de eventos (PowerShell)
+El script `extraer_eventos.ps1` recolecta eventos críticos del log de seguridad (IDs 4625, 4672, 4688) ocurridos en los últimos 7 días. Los resultados se guardan en formato JSON y se registran en un log estructurado (`logs.jsonl`) para trazabilidad.
+
+Clasificación semántica (Python)
+El script `clasificar_eventos.py` analiza cada evento y lo clasifica en categorías como:
+- Acceso fallido
+- Privilegios elevados
+- Ejecución sospechosa
+- Otro
+
+Se añaden metadatos como `run_id` y `timestamp_clasificacion` para auditoría.
+
+ Orquestación funcional
+El script `run_pipeline.ps1` ejecuta ambos módulos en secuencia, permitiendo una operación automatizada desde un solo punto de entrada.
+
 ---
- 
-##  Uso de dos lenguajes de programación
- 
-- **Lenguajes utilizados**: [Ej. Python + Bash / Python + PowerShell]
 
-- **Forma de integración**:  
-> [Explicar si el script principal invoca módulos en otro lenguaje, si hay módulos funcionales independientes, o si se combinan en la orquestación.]
- 
-- **Archivo relevante**: [`/scripts/run_pipeline.sh`] o [`/scripts/modulo_funcional.ps1`]
- 
+ Plan de IA
+
+Se ha documentado un plan de uso de IA en `docs/ai_plan.md`, que describe cómo se podría integrar un modelo semántico (GPT o heurístico) para mejorar la clasificación de eventos. La plantilla de prompt se encuentra en `prompts/prompt_v1.json`.
+
 ---
- 
-##  Plan de uso de IA
- 
-- **Propósito del uso de IA**:  
-> [Ej. enriquecer reportes, priorizar hallazgos, redactar resúmenes]
- 
-- **Punto de integración en el flujo**:  
-> [Dónde se invoca la IA y qué datos utiliza]
- 
-- **Modelo/API previsto**: [Ej. GPT-lite, OpenAI, HuggingFace]
- 
-- **Archivo del plan**: [`/docs/ai_plan.md`](ai_plan.md)
- 
+
+## 📁 Estructura del Proyecto
+
+An-lisis-Automatizado-de-Logs-del-Sistema-/ ├── src/ │ ├── extraer_eventos.ps1 │ └── clasificar_eventos.py ├── scripts/ │ └── run_pipeline.ps1 ├── examples/ │ ├── ejemplo_salida.json │ ├── classified_events.json │ └── logs.jsonl ├── docs/ │ ├── ai_plan.md │ └── entregable_3.md ├── prompts/ │ └── prompt_v1.json └── README.md
+
+Código
+
 ---
- 
-##  Prompt inicial
- 
-- **Archivo de plantilla**: [`/prompts/prompt_v1.json`](../prompts/prompt_v1.json)
 
-- **Campos incluidos**:  
+## 🚀 Ejecución del Pipeline
 
-  - `version`
+Desde PowerShell:
 
-  - `tarea`
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_pipeline.ps1
+Esto ejecuta la extracción de eventos y su clasificación automática.
 
-  - `template`
+. Estado del Proyecto
+. Extracción de eventos de seguridad (PowerShell)
 
-  - `instrucciones`
- 
----
- 
-##  Evidencia reproducible
- 
-- **Logs estructurados**: [`/examples/logs.jsonl`](../examples/logs.jsonl)
+ . Clasificación semántica de eventos (Python)
 
-- **Ejemplos de ejecución**: [`/examples`](../examples)
+ . Orquestación funcional con PowerShell
 
-- **Script de orquestación o módulo funcional**: [`/scripts`](../scripts)
+ . Logging estructurado en JSONL
+
+ . Plan de IA documentado
+
+ . Prompt inicial definido
+
+ . Flujo reproducible y modular
+
+ Evidencia de colaboración
+Repositorio compartido en MS Teams
+
+Captura del flujo funcional enviada
+
+Commits y pull requests en GitHub
+
+Código
  
----
- 
-##  Colaboración
- 
-> ¿Quién trabajó en esta integración? ¿Cómo se distribuyeron los roles? ¿Qué evidencia hay en GitHub (commits, issues, PRs)?
- 
----
- 
-##  Observaciones
- 
-> ¿Qué falta por conectar o ajustar? ¿Qué decisiones se tomaron sobre el uso de IA? ¿Qué se aprendió en esta etapa?
 
  
