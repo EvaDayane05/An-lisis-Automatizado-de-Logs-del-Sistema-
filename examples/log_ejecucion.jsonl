@@ -1,4 +1,0 @@
-{"timestamp": "...", "event": "inicio_proceso", "details": {"num_textos": 2}}
-{"timestamp": "...", "event": "analisis", "details": {"texto": "El producto es excelente y me hace feliz", "sentimiento": "positivo"}}
-{"timestamp": "...", "event": "analisis", "details": {"texto": "El servicio fue horrible y malo", "sentimiento": "negativo"}}
-{"timestamp": "...", "event": "fin_proceso", "details": {"num_resultados": 2}}
