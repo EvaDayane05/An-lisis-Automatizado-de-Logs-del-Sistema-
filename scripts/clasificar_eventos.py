@@ -20,15 +20,15 @@ def main(input_file, output_file):
         with open(input_file, encoding="utf8") as f:
             contenido = f.read().strip()
             if not contenido:
-                print(f"⚠️ El archivo '{input_file}' está vacío.")
+                print(f" El archivo '{input_file}' está vacío.")
                 return
             eventos = json.loads(contenido)
     except Exception as e:
-        print(f"❌ Error al leer el archivo: {e}")
+        print(f"Error al leer el archivo: {e}")
         return
 
     if not isinstance(eventos, list) or len(eventos) == 0:
-        print(f"⚠️ El archivo no contiene eventos válidos.")
+        print(f"El archivo no contiene eventos válidos.")
         return
 
     clasificados = []
