@@ -2,7 +2,7 @@
 
 # Proyecto Final PIA – Auditoría Forense Automatizada
 
-Este proyecto forma parte del Entregable 3 del Proyecto Final PIA. Integra dos tareas funcionales en distintos lenguajes (PowerShell y Python) para construir un pipeline modular, reproducible y orientado a la auditoría forense de eventos de seguridad en sistemas Windows.
+Este proyecto forma parte del Entregable 4 del Proyecto Final PIA. Integra dos tareas funcionales en distintos lenguajes (PowerShell y Python) para construir un pipeline modular, reproducible y orientado a la auditoría forense de eventos de seguridad en sistemas Windows. 
 
 ---
 
@@ -34,6 +34,48 @@ Se ha documentado un plan de uso de IA en `docs/ai_plan.md`, que describe cómo 
 ## 📁 Estructura del Proyecto
 
 An-lisis-Automatizado-de-Logs-del-Sistema-/ ├── src/ │ ├── extraer_eventos.ps1 │ └── clasificar_eventos.py ├── scripts/ │ └── run_pipeline.ps1 ├── examples/ │ ├── ejemplo_salida.json │ ├── classified_events.json │ └── logs.jsonl ├── docs/ │ ├── ai_plan.md │ └── entregable_3.md ├── prompts/ │ └── prompt_v1.json └── README.md
+
+An-lisis-Automatizado-de-Logs-del-Sistema-/
+├── docs/
+│   └──ai_plan.md
+│   └──docss.md
+│   └──entregable_2.md
+│   └──entregable_3.md
+│   
+├── examples/
+│   └── README2.md
+│   └──classified_events.json
+│   └──ejemplo_salida.json
+│   └──logs.json
+│   └──logs.jsonl
+│
+├── prompt/
+│   └──prompt_v1.json
+│
+├── prompts/
+│   └──prompt_v1.json
+│
+├── proposals/
+│   └──propuesta.md
+│
+├── scripts/
+│   └──clasificar_eventos.py
+│   └──extraer_eventos.ps1
+│   └──run_pipeline.ps1
+│ 
+├── src/
+│   └──_pycache_/
+│     └────config-cpython-312.pyc
+│     └────config.cpython-313.pyc
+│   └── clasificar_eventos.py              (El nuevo archivo para tu API key)
+│   └── detectar_eventos.ps1    (El script que saca los logs de Windows)
+│   └── extraer_eventos.ps1  (El script de Python con la IA)
+│   └── tarea_1.py
+│
+├── tests/
+│   └──Scripts de Validacion y pruebas
+└── run_pipeline.ps1           (El script principal que ejecutarás)
+
 
 Código
 
@@ -70,6 +112,6 @@ Captura del flujo funcional enviada
 Commits y pull requests en GitHub
 
 Código
- 
+
 
  
