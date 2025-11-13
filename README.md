@@ -2,7 +2,7 @@
 
 # Proyecto Final PIA – Auditoría Forense Automatizada
 
-Este proyecto forma parte del Entregable 4 del Proyecto Final PIA. Integra dos tareas funcionales en distintos lenguajes (PowerShell y Python) para construir un pipeline modular, reproducible y orientado a la auditoría forense de eventos de seguridad en sistemas Windows. 
+Este proyecto forma parte del Entregable 4 del Proyecto Final PIA. Desarrolla un istema automatizado para la recoleccion, analisis y clasificacion de eventos de seguridad de windows, utilizando scripts en POWERSHELL y PYTHON, ademas de intregar un modelo de inteligencia artificial (IA) para mejorar la deteccion de eventos relevantes. 
 
 ---
 
@@ -28,6 +28,7 @@ El script `run_pipeline.ps1` ejecuta ambos módulos en secuencia, permitiendo un
  Plan de IA
 
 Se ha documentado un plan de uso de IA en `docs/ai_plan.md`, que describe cómo se podría integrar un modelo semántico (GPT o heurístico) para mejorar la clasificación de eventos. La plantilla de prompt se encuentra en `prompts/prompt_v1.json`.
+La IA se integra en src/clasificar_eventos.py y se uso el modelo tngtech/deepseek-r1t2-chimera:free 
 
 ---
 
