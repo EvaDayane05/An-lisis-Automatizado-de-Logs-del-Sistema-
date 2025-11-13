@@ -1,0 +1,6 @@
+{
+  "version": "1.0",
+  "tarea": "Clasificación de eventos de seguridad",
+  "template": "Clasifica los eventos en categorías semánticas",
+  "instrucciones": "Usa el campo 'Mensaje' para inferir el tipo de evento. Devuelve un JSON con etiquetas por evento."
+}
