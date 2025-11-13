@@ -1,52 +1,75 @@
 # Analisis-Automatizado-de-Logs-del-Sistema-
-Pia de ciberseguridad 
-Desarrollar un script en PowerShell que analice los registros de eventos de Windows (Event Logs) en busca de patrones relacionados con accesos no autorizados, ejecuciones anómalas o intentos fallidos de inicio de sesión. El objetivo es fortalecer las capacidades de detección temprana de incidentes en un entorno local.
-#  Entregable 2 – MVP funcional parcial
- 
-> Este entregable forma parte del repositorio único del proyecto PIA. La propuesta técnica se encuentra en [`/proposals/propuesta.md`](../proposals/propuesta.md).
- 
+
+# Proyecto Final PIA – Auditoría Forense Automatizada
+
+Este proyecto forma parte del Entregable 3 del Proyecto Final PIA. Integra dos tareas funcionales en distintos lenguajes (PowerShell y Python) para construir un pipeline modular, reproducible y orientado a la auditoría forense de eventos de seguridad en sistemas Windows.
+
 ---
- 
-##  Tarea implementada
- 
-- **Nombre de la tarea**: [Ej. Inventario de servicios expuestos]
-- **Descripción funcional**:  
-> [Narración objetiva de lo que hace la tarea: qué entradas recibe, qué procesamiento realiza, qué salidas genera.]
- 
+
+ Componentes del Proyecto
+
+ Extracción de eventos (PowerShell)
+El script `extraer_eventos.ps1` recolecta eventos críticos del log de seguridad (IDs 4625, 4672, 4688) ocurridos en los últimos 7 días. Los resultados se guardan en formato JSON y se registran en un log estructurado (`logs.jsonl`) para trazabilidad.
+
+Clasificación semántica (Python)
+El script `clasificar_eventos.py` analiza cada evento y lo clasifica en categorías como:
+- Acceso fallido
+- Privilegios elevados
+- Ejecución sospechosa
+- Otro
+
+Se añaden metadatos como `run_id` y `timestamp_clasificacion` para auditoría.
+
+ Orquestación funcional
+El script `run_pipeline.ps1` ejecuta ambos módulos en secuencia, permitiendo una operación automatizada desde un solo punto de entrada.
+
 ---
- 
-##  Entradas utilizadas
- 
-> input_ejemplo.json Textos en formato JSON.
- 
+
+ Plan de IA
+
+Se ha documentado un plan de uso de IA en `docs/ai_plan.md`, que describe cómo se podría integrar un modelo semántico (GPT o heurístico) para mejorar la clasificación de eventos. La plantilla de prompt se encuentra en `prompts/prompt_v1.json`.
+
 ---
- 
-##  Salidas generadas
- 
-> output_resultado.json 	Resultados del análisis.
- 
+
+## 📁 Estructura del Proyecto
+
+An-lisis-Automatizado-de-Logs-del-Sistema-/ ├── src/ │ ├── extraer_eventos.ps1 │ └── clasificar_eventos.py ├── scripts/ │ └── run_pipeline.ps1 ├── examples/ │ ├── ejemplo_salida.json │ ├── classified_events.json │ └── logs.jsonl ├── docs/ │ ├── ai_plan.md │ └── entregable_3.md ├── prompts/ │ └── prompt_v1.json └── README.md
+
+Código
+
 ---
+
+## 🚀 Ejecución del Pipeline
+
+Desde PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run_pipeline.ps1
+Esto ejecuta la extracción de eventos y su clasificación automática.
+
+. Estado del Proyecto
+. Extracción de eventos de seguridad (PowerShell)
+
+ . Clasificación semántica de eventos (Python)
+
+ . Orquestación funcional con PowerShell
+
+ . Logging estructurado en JSONL
+
+ . Plan de IA documentado
+
+ . Prompt inicial definido
+
+ . Flujo reproducible y modular
+
+ Evidencia de colaboración
+Repositorio compartido en MS Teams
+
+Captura del flujo funcional enviada
+
+Commits y pull requests en GitHub
+
+Código
  
-##  Evidencia reproducible
+
  
-- **Ruta a ejemplos de ejecución**: [`/examples`](../examples)
-- **Ruta a logs estructurados**: [`/examples/logs.jsonl`](../examples/logs.jsonl)
-- **Script de ejecución**: [`/scripts/run_tarea1.sh`](../scripts/run_tarea1.sh) o equivalente
- 
----
- 
-##  Documentación técnica
- 
-> Breve resumen de cómo se ejecuta la tarea, dependencias necesarias, y observaciones iniciales.
- 
----
- 
-##  Colaboración
- 
-> ¿Quién trabajó en esta tarea? ¿Cómo se distribuyeron los roles? ¿Qué evidencia hay en GitHub (commits, issues, PRs)?
- 
----
- 
-##  Observaciones
- 
-> ¿Qué falta por implementar? ¿Qué ajustes se prevén? ¿Qué se aprendió en esta etapa?

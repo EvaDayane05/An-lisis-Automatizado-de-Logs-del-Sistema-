@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ##########Pipeline actualizado 
  
  
@@ -59,3 +60,7 @@ try {
     Write-Error " Error en el pipeline: $_"
     exit 1
 }
+=======
+powershell -ExecutionPolicy Bypass -File src/extraer_eventos.ps1
+python src/clasificar_eventos.py examples/ejemplo_salida.json examples/classified_events.json
+>>>>>>> 28b4c6fdc5b0679a50353144f2bca62e456ab3b3
