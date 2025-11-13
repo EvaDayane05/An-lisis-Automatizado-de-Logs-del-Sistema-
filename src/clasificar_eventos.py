@@ -6,7 +6,7 @@ from datetime import datetime
 try:
     from config import OPENROUTER_API_KEY
 except ImportError:
-    print("❌ Error: No se encontró el archivo 'config.py'.", file=sys.stderr)
+    print("Error: No se encontró el archivo 'config.py'.", file=sys.stderr)
     print("Asegúrate de crearlo en la carpeta 'src/' con tu OPENROUTER_API_KEY.", file=sys.stderr)
     sys.exit(1)
  
@@ -31,7 +31,7 @@ def clasificar_evento_con_ia(evento, silent=False):
     Clasifica un evento usando la API de OpenRouter.
     """
     if not OPENROUTER_API_KEY or OPENROUTER_API_KEY == "sk-or-....tu-clave-secreta-aqui":
-        print("❌ Error: La OPENROUTER_API_KEY no está configurada en 'src/config.py'.", file=sys.stderr)
+        print("Error: La OPENROUTER_API_KEY no está configurada en 'src/config.py'.", file=sys.stderr)
         return "Error: API Key no configurada"
  
     mensaje = evento.get("Mensaje", "")
@@ -53,43 +53,43 @@ def clasificar_evento_con_ia(evento, silent=False):
         categorias_validas = ['Acceso Fallido', 'Privilegios Elevados', 'Ejecución de Proceso', 'Actividad Sospechosa', 'Indeterminado']
         if categoria not in categorias_validas:
             if not silent:
-                print(f"⚠️ Advertencia: La IA devolvió '{categoria}'. Se marcará como 'Indeterminado'.", file=sys.stderr)
+                print(f"Advertencia: La IA devolvió '{categoria}'. Se marcará como 'Indeterminado'.", file=sys.stderr)
             categoria = 'Indeterminado'
         return categoria
  
     except requests.exceptions.RequestException as e:
-        print(f"❌ Error en la llamada a la API: {e}", file=sys.stderr)
+        print(f"Error en la llamada a la API: {e}", file=sys.stderr)
         return "Error: Falla de API"
     except (KeyError, IndexError):
-        print(f"❌ Error al parsear la respuesta de la IA: {response.text}", file=sys.stderr)
+        print(f"Error al parsear la respuesta de la IA: {response.text}", file=sys.stderr)
         return "Error: Respuesta IA inválida"
     except Exception as e:
-        print(f"❌ Error inesperado en clasificación: {e}", file=sys.stderr)
+        print(f"Error inesperado en clasificación: {e}", file=sys.stderr)
         return "Error: Desconocido"
  
 def main(input_file, output_file, silent=False):
     run_id = str(uuid.uuid4())
     try:
-        # ✅ Ahora se abre con utf-8-sig
+        #  Ahora se abre con utf-8-sig
         with open(input_file, "r", encoding="utf-8-sig") as f:
             contenido = f.read().strip()
             if not contenido:
                 if not silent:
-                    print(f"⚠️ El archivo '{input_file}' está vacío.")
+                    print(f"El archivo '{input_file}' está vacío.")
                 return
             eventos = json.loads(contenido)
     except Exception as e:
-        print(f"❌ Error al leer el archivo: {e}", file=sys.stderr)
+        print(f"Error al leer el archivo: {e}", file=sys.stderr)
         return
  
     if not isinstance(eventos, list) or len(eventos) == 0:
         if not silent:
-            print(f"⚠️ El archivo no contiene eventos válidos.")
+            print(f"El archivo no contiene eventos válidos.")
         return
  
     clasificados = []
     if not silent:
-        print(f"🤖 Iniciando clasificación con IA para {len(eventos)} eventos... (Esto puede tardar)")
+        print(f"Iniciando clasificación con IA para {len(eventos)} eventos... (Esto puede tardar)")
     for i, evento in enumerate(eventos, 1):
         if not silent:
             print(f" -> Procesando evento {i}/{len(eventos)} (ID: {evento.get('EventID')})")
@@ -100,12 +100,12 @@ def main(input_file, output_file, silent=False):
         evento_clasificado["timestamp_clasificacion"] = datetime.utcnow().isoformat()
         clasificados.append(evento_clasificado)
  
-    # ✅ También se guarda con utf-8-sig
+    #  También se guarda con utf-8-sig
     with open(output_file, "w", encoding="utf-8-sig") as f:
         json.dump(clasificados, f, indent=2, ensure_ascii=False)
  
     if not silent:
-        print(f"✅ Clasificación con IA completada. Se procesaron {len(clasificados)} eventos.")
+        print(f" Clasificación con IA completada. Se procesaron {len(clasificados)} eventos.")
  
 if __name__ == "__main__":
     # Revisa si --silent está en los argumentos
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     input_file = args[0]
     output_file = args[1]
     if not OPENROUTER_API_KEY or OPENROUTER_API_KEY == "sk-or-....tu-clave-secreta-aqui":
-        print("❌ Error: Tu OPENROUTER_API_KEY no está configurada.", file=sys.stderr)
+        print(" Error: Tu OPENROUTER_API_KEY no está configurada.", file=sys.stderr)
         print("Por favor, edita el archivo 'src/config.py' y añade tu clave.", file=sys.stderr)
         sys.exit(1)
     main(input_file, output_file, silent=silent_mode)
@@ -145,15 +145,15 @@ def main(input_file, output_file):
         with open(input_file, encoding="utf8") as f:
             contenido = f.read().strip()
             if not contenido:
-                print(f"⚠️ El archivo '{input_file}' está vacío.")
+                print(f" El archivo '{input_file}' está vacío.")
                 return
             eventos = json.loads(contenido)
     except Exception as e:
-        print(f"❌ Error al leer el archivo: {e}")
+        print(f" Error al leer el archivo: {e}")
         return
 
     if not isinstance(eventos, list) or len(eventos) == 0:
-        print(f"⚠️ El archivo no contiene eventos válidos.")
+        print(f" El archivo no contiene eventos válidos.")
         return
 
     clasificados = []
