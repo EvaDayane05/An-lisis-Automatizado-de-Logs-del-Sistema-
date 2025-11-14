@@ -149,9 +149,10 @@ Los cambios aplicados tuvieron el siguiente impacto:
 
 ## Confirmación de cierre
 
-Confirmamos que la última actualización del repositorio fue realizada **antes del 18 de noviembre a las 23:59 hrs (hora local de Monterrey)**.
+Confirmamos que la última actualización del repositorio fue realizada **antes del 18 de noviembre a las 23:59 hrs**
 
-- **Fecha del último commit:** 2025-11-18 09:21 PM 
-- **Usuario responsable del cierre:** Edgar
+- **Fecha del último commit:** 2025-11-13 10:20 PM 
+- **Usuario responsable del cierre:** Rene
+
 
 
