@@ -1,133 +1,58 @@
 # Análisis Automatizado de Logs del Sistema – Proyecto PIA
-# Descripción General del Entregable 4
 
-Este entregable corresponde a la fase en la que se integran las primeras tareas del proyecto y se valida el flujo funcional casi completo, incluyendo:
+#  Reporte Final – Cambios Relevantes en la Planeación
 
-- Extracción automatizada de eventos del sistema (PowerShell)
-- Clasificación de eventos usando IA (Python + OpenRouter)
-- Logging estructurado
-- Pipeline funcional y reproducible
-- Evidencia generada en /examples
+> Este documento forma parte del entregable final del proyecto PIA. Su objetivo es dejar constancia de los ajustes significativos realizados durante el desarrollo, los cuales tuvieron impacto en el resultado final.
 
-----
+---
 
-# Avance Técnico Consolidado
+##  Cambios en tareas técnicas
 
-## Extracción de Eventos (PowerShell)
+> ¿Se modificó, reemplazó o eliminó alguna tarea respecto a lo propuesto originalmente?
 
-Script:
-|__scripts/extraer_eventos.ps1
+Se mantuvieron las mismas tareas planteadas en la propuesta inicial.
 
+---
 
-Obtiene eventos de seguridad relevantes (IDs 4625, 4672, 4688) y los guarda en:
-|__examples/ejemplo_salida.json
+##  Cambios en el uso de IA
 
+> ¿Se ajustó el propósito, modelo, punto de integración o diseño de prompts?
 
-El proceso también genera logs en:
-|__examples/logs.jsonl
+No fue necesario realizar modificaciones en este aspecto.
 
-## Clasificación con Inteligencia Artificial (Python)
+---
 
-Script:
-|__src/clasificar_eventos.py
+##  Cambios en roles o distribución del trabajo
 
-La IA clasifica los eventos en:
+> ¿Hubo reasignación de responsabilidades dentro del equipo?
 
-- Acceso Fallido
-- Privilegios Elevados
-- Ejecución de Proceso
-- Actividad Sospechosa
-- Indeterminado
+La estructura de roles se mantuvo sin cambios, ya que funcionó de manera adecuada para el desarrollo del proyecto.
 
-**Modelo usado:**
-|__tngtech/deepseek-r1t2-chimera:free
+---
 
-**Proveedor:**
-|__OpenRouter API
+##  Decisiones técnicas relevantes
 
+> ¿Qué decisiones técnicas se tomaron que afectaron el diseño, ejecución o documentación del proyecto?
 
-**La clave API se gestiona mediante:**
-|__src/config.py (NO incluido en GitHub)
+Se decidió forzar el uso del mismo encoding (`utf8-sig`) en el código para evitar errores de lectura y garantizar la correcta interpretación de los archivos.
 
-## Orquestación del Pipeline
+---
 
-El flujo completo se ejecuta mediante:
-|__scripts/run_pipeline.ps1
+##  Impacto en el entregable final
 
+> ¿Cómo afectaron estos cambios al resultado final?
 
-Este script:
+El impacto fue mínimo, ya que no se requirieron modificaciones radicales.
 
-- Ejecuta la extracción de eventos
-- Llama al clasificador en Python
-- Genera evidencia en /examples
-- Registra el proceso en logs.jsonl
+> ¿Qué se logró, qué quedó pendiente y qué se aprendió?
 
-## Ejecución del Pipeline
+Se logró cumplir con los objetivos planteados y se fortaleció el trabajo en equipo, lo que permitió alcanzar los resultados esperados. La principal enseñanza fue la importancia de la colaboración y la coordinación para lograr un proyecto exitoso.
 
-Ejecutar desde PowerShell:
-|__powershell -ExecutionPolicy Bypass -File scripts/run_pipeline.ps1
+---
 
+## Confirmación de cierre
 
-Al finalizar, se generan:
+Confirmamos que la última actualización del repositorio fue realizada **antes del 18 de noviembre a las 23:59 hrs**
 
-Archivo	                               |       Descripción
-examples/ejemplo_salida.json	          |       Eventos extraídos
-examples/classified_events.json	       |       Eventos clasificados con IA
-examples/logs.jsonl	                   |       Log del pipeline
-
-## Plan de IA (versión para Entregable 4)
-
-La IA se integra únicamente para clasificar eventos.
-
-**El prompt utilizado se encuentra en:**
-|__prompts/prompt_v1.json
-
-**La IA se invoca con:**
-|__requests.post(API_URL, headers, json=data)
-
-
-El sistema valida que las respuestas sean coherentes y recuperables (en caso contrario dira "INDETERMINADO").
-
-## Estructura del Proyecto (Entregable 4)
-```plaintext
-Análisis-Automatizado-de-Logs-del-Sistema/
-├── docs/
-│   ├── ai_plan.md
-│   └── entregable_4.md
-│
-├── examples/
-│   ├── ejemplo_salida.json
-│   ├── classified_events.json
-│   └── logs.jsonl
-│
-├── prompts/
-│   └── prompt_v1.json
-│
-├── scripts/
-│   ├── extraer_eventos.ps1
-│   ├── clasificar_eventos.py
-│   └── run_pipeline.ps1
-│
-├── src/
-│   ├── clasificar_eventos.py
-│   ├── extraer_eventos.ps1
-│   └── config.py
-│
-└── README.md
-```
- 
-### Evidencia 
-La carpeta /examples incluye evidencia real generada por la ejecución del pipeline:
-- Eventos originales extraídos
-- Eventos clasificados por IA
-- Log estructurado del proceso
-
-### Estado Actual del Proyecto (Entregable 4)
-- Flujo técnico consolidado
-- IA integrada y funcionando
-- Logging estructurado implementado
-- Pipeline reproducible
-- Documentación técnica actualizada
-- Archivos generados correctamente
-
-  
+- **Fecha del último commit:** 2025-11-13 11:05 PM 
+- **Usuario responsable del cierre:** Rene(DARKFENIX34)
