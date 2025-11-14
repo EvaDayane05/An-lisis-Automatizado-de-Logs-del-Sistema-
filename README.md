@@ -1,118 +1,133 @@
-# Analisis-Automatizado-de-Logs-del-Sistema-
+# Análisis Automatizado de Logs del Sistema – Proyecto PIA
+# Descripción General del Entregable 4
 
-# Proyecto Final PIA – Auditoría Forense Automatizada
+Este entregable corresponde a la fase en la que se integran las primeras tareas del proyecto y se valida el flujo funcional casi completo, incluyendo:
 
-Este proyecto forma parte del Entregable 4 del Proyecto Final PIA. Desarrolla un istema automatizado para la recoleccion, analisis y clasificacion de eventos de seguridad de windows, utilizando scripts en POWERSHELL y PYTHON, ademas de intregar un modelo de inteligencia artificial (IA) para mejorar la deteccion de eventos relevantes. 
+- Extracción automatizada de eventos del sistema (PowerShell)
+- Clasificación de eventos usando IA (Python + OpenRouter)
+- Logging estructurado
+- Pipeline funcional y reproducible
+- Evidencia generada en /examples
 
----
+----
 
- Componentes del Proyecto
+# Avance Técnico Consolidado
 
- Extracción de eventos (PowerShell)
-El script `extraer_eventos.ps1` recolecta eventos críticos del log de seguridad (IDs 4625, 4672, 4688) ocurridos en los últimos 7 días. Los resultados se guardan en formato JSON y se registran en un log estructurado (`logs.jsonl`) para trazabilidad.
+## Extracción de Eventos (PowerShell)
 
-Clasificación semántica (Python)
-El script `clasificar_eventos.py` analiza cada evento y lo clasifica en categorías como:
-- Acceso fallido
-- Privilegios elevados
-- Ejecución sospechosa
-- Otro
+Script:
+|__scripts/extraer_eventos.ps1
 
-Se añaden metadatos como `run_id` y `timestamp_clasificacion` para auditoría.
 
- Orquestación funcional
-El script `run_pipeline.ps1` ejecuta ambos módulos en secuencia, permitiendo una operación automatizada desde un solo punto de entrada.
+Obtiene eventos de seguridad relevantes (IDs 4625, 4672, 4688) y los guarda en:
+|__examples/ejemplo_salida.json
 
----
 
- Plan de IA
+El proceso también genera logs en:
+|__examples/logs.jsonl
 
-Se ha documentado un plan de uso de IA en `docs/ai_plan.md`, que describe cómo se podría integrar un modelo semántico (GPT o heurístico) para mejorar la clasificación de eventos. La plantilla de prompt se encuentra en `prompts/prompt_v1.json`.
-La IA se integra en src/clasificar_eventos.py y se uso el modelo tngtech/deepseek-r1t2-chimera:free 
+## Clasificación con Inteligencia Artificial (Python)
 
----
+Script:
+|__src/clasificar_eventos.py
 
-## 📁 Estructura del Proyecto
+La IA clasifica los eventos en:
 
-An-lisis-Automatizado-de-Logs-del-Sistema-/ ├── src/ │ ├── extraer_eventos.ps1 │ └── clasificar_eventos.py ├── scripts/ │ └── run_pipeline.ps1 ├── examples/ │ ├── ejemplo_salida.json │ ├── classified_events.json │ └── logs.jsonl ├── docs/ │ ├── ai_plan.md │ └── entregable_3.md ├── prompts/ │ └── prompt_v1.json └── README.md
+- Acceso Fallido
+- Privilegios Elevados
+- Ejecución de Proceso
+- Actividad Sospechosa
+- Indeterminado
 
-An-lisis-Automatizado-de-Logs-del-Sistema-/
+**Modelo usado:**
+|__tngtech/deepseek-r1t2-chimera:free
+
+**Proveedor:**
+|__OpenRouter API
+
+
+**La clave API se gestiona mediante:**
+|__src/config.py (NO incluido en GitHub)
+
+## Orquestación del Pipeline
+
+El flujo completo se ejecuta mediante:
+|__scripts/run_pipeline.ps1
+
+
+Este script:
+
+- Ejecuta la extracción de eventos
+- Llama al clasificador en Python
+- Genera evidencia en /examples
+- Registra el proceso en logs.jsonl
+
+## Ejecución del Pipeline
+
+Ejecutar desde PowerShell:
+|__powershell -ExecutionPolicy Bypass -File scripts/run_pipeline.ps1
+
+
+Al finalizar, se generan:
+
+Archivo	                               |       Descripción
+examples/ejemplo_salida.json	          |       Eventos extraídos
+examples/classified_events.json	       |       Eventos clasificados con IA
+examples/logs.jsonl	                   |       Log del pipeline
+
+## Plan de IA (versión para Entregable 4)
+
+La IA se integra únicamente para clasificar eventos.
+
+**El prompt utilizado se encuentra en:**
+|__prompts/prompt_v1.json
+
+**La IA se invoca con:**
+|__requests.post(API_URL, headers, json=data)
+
+
+El sistema valida que las respuestas sean coherentes y recuperables (en caso contrario dira "INDETERMINADO").
+
+## Estructura del Proyecto (Entregable 4)
+```plaintext
+Análisis-Automatizado-de-Logs-del-Sistema/
 ├── docs/
-│   └──ai_plan.md
-│   └──docss.md
-│   └──entregable_2.md
-│   └──entregable_3.md
-│   
-├── examples/
-│   └── README2.md
-│   └──classified_events.json
-│   └──ejemplo_salida.json
-│   └──logs.json
-│   └──logs.jsonl
+│   ├── ai_plan.md
+│   └── entregable_4.md
 │
-├── prompt/
-│   └──prompt_v1.json
+├── examples/
+│   ├── ejemplo_salida.json
+│   ├── classified_events.json
+│   └── logs.jsonl
 │
 ├── prompts/
-│   └──prompt_v1.json
-│
-├── proposals/
-│   └──propuesta.md
+│   └── prompt_v1.json
 │
 ├── scripts/
-│   └──clasificar_eventos.py
-│   └──extraer_eventos.ps1
-│   └──run_pipeline.ps1
-│ 
-├── src/
-│   └──_pycache_/
-│     └────config-cpython-312.pyc
-│     └────config.cpython-313.pyc
-│   └── clasificar_eventos.py              (El nuevo archivo para tu API key)
-│   └── detectar_eventos.ps1    (El script que saca los logs de Windows)
-│   └── extraer_eventos.ps1  (El script de Python con la IA)
-│   └── tarea_1.py
+│   ├── extraer_eventos.ps1
+│   ├── clasificar_eventos.py
+│   └── run_pipeline.ps1
 │
-├── tests/
-│   └──Scripts de Validacion y pruebas
-└── run_pipeline.ps1           (El script principal que ejecutarás)
-
-
-Código
-
----
-
-## 🚀 Ejecución del Pipeline
-
-Desde PowerShell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/run_pipeline.ps1
-Esto ejecuta la extracción de eventos y su clasificación automática.
-
-. Estado del Proyecto
-. Extracción de eventos de seguridad (PowerShell)
-
- . Clasificación semántica de eventos (Python)
-
- . Orquestación funcional con PowerShell
-
- . Logging estructurado en JSONL
-
- . Plan de IA documentado
-
- . Prompt inicial definido
-
- . Flujo reproducible y modular
-
- Evidencia de colaboración
-Repositorio compartido en MS Teams
-
-Captura del flujo funcional enviada
-
-Commits y pull requests en GitHub
-
-Código
-
-
+├── src/
+│   ├── clasificar_eventos.py
+│   ├── extraer_eventos.ps1
+│   └── config.py
+│
+└── README.md
+```
  
+### Evidencia 
+La carpeta /examples incluye evidencia real generada por la ejecución del pipeline:
+- Eventos originales extraídos
+- Eventos clasificados por IA
+- Log estructurado del proceso
+
+### Estado Actual del Proyecto (Entregable 4)
+- Flujo técnico consolidado
+- IA integrada y funcionando
+- Logging estructurado implementado
+- Pipeline reproducible
+- Documentación técnica actualizada
+- Archivos generados correctamente
+
+  
