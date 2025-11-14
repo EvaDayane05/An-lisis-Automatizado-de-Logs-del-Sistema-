@@ -151,8 +151,9 @@ Los cambios aplicados tuvieron el siguiente impacto:
 
 Confirmamos que la última actualización del repositorio fue realizada **antes del 18 de noviembre a las 23:59 hrs**
 
-- **Fecha del último commit:** 2025-11-13 10:20 PM 
-- **Usuario responsable del cierre:** Rene
+- **Fecha del último commit:** 2025-11-13 11:05 PM 
+- **Usuario responsable del cierre:** Rene(DARKFENIX34)
+
 
 
 
